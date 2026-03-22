@@ -12,7 +12,6 @@ import com.sd.enterprise.mvcapp.repository.UserRepository;
 import com.sd.enterprise.mvcapp.repository.WorkoutRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
