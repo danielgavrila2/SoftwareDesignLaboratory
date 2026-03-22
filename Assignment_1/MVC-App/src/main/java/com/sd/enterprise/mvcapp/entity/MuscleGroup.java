@@ -1,0 +1,12 @@
+package com.sd.enterprise.mvcapp.entity;
+
+public enum MuscleGroup {
+    CHEST,
+    BACK,
+    SHOULDERS,
+    ARMS,
+    LEGS,
+    CORE,
+    FULL_BODY,
+    CARDIO
+}
