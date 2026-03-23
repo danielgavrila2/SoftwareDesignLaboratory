@@ -173,9 +173,9 @@ Request → Controller → Service → Repository → Entity → DB
 | **Interceptor** | Angular `authInterceptor` — adds JWT to every HTTP request |
 
 ### Security
-- **BCrypt** password hashing (strength 10) — satisfies bonus requirement
-- **JWT** stateless authentication — no server-side sessions
-- **Spring Security** with method-level `@PreAuthorize` — satisfies bonus requirement
+- **BCrypt** password hashing (strength 10)
+- **JWT** stateless authentication 
+- **Spring Security** with method-level `@PreAuthorize`
 - **Role-Based Access Control**: VISITOR (unauthenticated), USER, ADMIN
 
 ### Additional Features (assignment requirements)
@@ -215,7 +215,7 @@ users (id, firstName, lastName, email, password[BCrypt], role, createdAt, enable
 
 ## 🐛 Troubleshooting
 
-**CORS errors** — ensure backend is running on 8080 and Angular on 4200.
+**CORS errors** — ensure backend is running on 8081 and Angular on 4200.
 
 **JWT expired** — log out and log back in. Token TTL is 24h.
 
