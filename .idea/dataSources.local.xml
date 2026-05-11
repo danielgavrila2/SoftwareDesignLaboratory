@@ -10,7 +10,9 @@
       <user-name>postgres</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="database" qname="@">
+          <node kind="database">
+            <name qname="@" />
+            <name qname="fitness_user_db" />
             <node kind="schema" qname="@" />
           </node>
         </introspection-scope>

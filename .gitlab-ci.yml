@@ -1,0 +1,72 @@
+image: maven:3.9.6-eclipse-temurin-21
+
+stages:
+  - lint
+  - test
+
+# Define variables for caching
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - fitness-frontend/node_modules/
+
+# -----------------------
+# Linter Stage
+# -----------------------
+frontend-lint:
+  image: node:20
+  stage: lint
+  script:
+    - cd fitness-frontend
+    - npm ci
+    - npm run lint
+  allow_failure: true
+
+backend-static-analysis:
+  stage: lint
+  script:
+    # Run PMD for static analysis on the services (ignores failures to not block tests if strict rules fail)
+    - cd userservice && mvn pmd:pmd || true
+    - cd ../activityservice && mvn pmd:pmd || true
+    - cd ../aiservice && mvn pmd:pmd || true
+  artifacts:
+    paths:
+      - "*/target/pmd.xml"
+    expire_in: 1 week
+  allow_failure: true
+
+# -----------------------
+# Test Stage
+# -----------------------
+test-userservice:
+  stage: test
+  script:
+    - cd userservice
+    - mvn clean test
+  artifacts:
+    reports:
+      junit:
+        - userservice/target/surefire-reports/TEST-*.xml
+
+test-activityservice:
+  stage: test
+  script:
+    - cd activityservice
+    - mvn clean test
+  artifacts:
+    reports:
+      junit:
+        - activityservice/target/surefire-reports/TEST-*.xml
+
+test-aiservice:
+  stage: test
+  script:
+    - cd aiservice
+    - mvn clean test
+  artifacts:
+    reports:
+      junit:
+        - aiservice/target/surefire-reports/TEST-*.xml
