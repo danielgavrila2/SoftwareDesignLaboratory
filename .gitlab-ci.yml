@@ -4,7 +4,6 @@ stages:
   - lint
   - test
 
-# Define variables for caching
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
@@ -13,9 +12,7 @@ cache:
     - .m2/repository/
     - fitness-frontend/node_modules/
 
-# -----------------------
-# Linter Stage
-# -----------------------
+
 frontend-lint:
   image: node:20
   stage: lint
@@ -28,7 +25,6 @@ frontend-lint:
 backend-static-analysis:
   stage: lint
   script:
-    # Run PMD for static analysis on the services (ignores failures to not block tests if strict rules fail)
     - cd userservice && mvn pmd:pmd || true
     - cd ../activityservice && mvn pmd:pmd || true
     - cd ../aiservice && mvn pmd:pmd || true
@@ -38,9 +34,7 @@ backend-static-analysis:
     expire_in: 1 week
   allow_failure: true
 
-# -----------------------
-# Test Stage
-# -----------------------
+
 test-userservice:
   stage: test
   script:
